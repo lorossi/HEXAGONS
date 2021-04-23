@@ -26,6 +26,7 @@ class Engine {
 
   _run() {
     // bootstrap the sketch
+    this.preload();
     this.setup();
     // anti alias
     this._ctx.imageSmoothingQuality = "high";
@@ -147,14 +148,16 @@ class Engine {
     this._ctx.fillRect(0, 0, this._canvas.width, this._canvas.height);
   }
 
+  preload() {
+    // ran once
+  }
+
   setup() {
     // ran once
-    setup();
   }
 
   draw() {
     // ran continuosly
-    draw();
   }
 }
 

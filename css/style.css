@@ -1,7 +1,32 @@
+@font-face {
+  font-family: Hack;
+  src: url(Hack-Bold.ttf);
+}
+
 body *, body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+}
+
+body {
+  font-family: Hack;
+}
+
+a {
+  color: rgb(200, 200, 200);
+}
+
+a.visited {
+  color: rgb(100, 100, 100);
+}
+
+a:hover {
+  color: rgb(255, 255, 255);
+}
+
+#reset {
+  cursor: pointer;
 }
 
 .container {
@@ -14,8 +39,8 @@ body *, body {
 }
 
 #sketch {
-  height: 95vh;
-  width: 95vh;
+  height: 90vh;
+  width: 90vh;
 
   touch-action: none;
 }
@@ -25,6 +50,16 @@ body *, body {
   width: 100vw;
 
   bottom: 1vh;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.footer * {
+  margin-left: 5vw;
+  margin-right: 5vw;
+  user-select: none;
 }
 
 @media only screen and (max-width: 600px) {

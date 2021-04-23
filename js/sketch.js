@@ -1,19 +1,31 @@
 class Sketch extends Engine {
+  preload() {
+    const reset = document.querySelector("#reset");
+    reset.addEventListener("click", e => this.setup(e));
+  }
+
   setup() {
     // parameters
-    this._rows = 10;
-    this._cols = 10;
+    this._rows = 12;
+    this._cols = 12;
     this._duration = 900;
     this._phases = 10;
-    this._hexagon_mode = 0;
+    this._hexagon_mode = this._random_int(1);
+    this._back_colors = ["rgb(15, 15, 15)", "rgb(220, 220, 220)"];
     this._recording = false;
     this._show_fps = false;
-    this._auto = false;
+    this._auto = true;
+
     // sketch setup
+    this._frame_offset = this._frameCount + 1;
     this._scl = this._width / this._cols;
     this._phase_duration = this._duration / this._phases;
     this._noise = new SimplexNoise();
     console.clear();
+    // set page style
+    document.body.style.backgroundColor = this._back_colors[this._hexagon_mode];
+    const links = document.querySelectorAll("a");
+    links.forEach(l => l.style.color = this._back_colors[(this._hexagon_mode + 1) % 2]);
     // setup capturer
     if (this._recording) {
       this._capturer = new CCapture({ format: "png" });
@@ -31,8 +43,8 @@ class Sketch extends Engine {
       const noise_theta = Math.PI * 2 * i / this._phases;
 
       for (let j = 0; j < this._cols * this._rows; j++) {
-        const rho = 4;
-        const n_scl = 1;
+        const rho = 10;
+        const n_scl = 2;
         const x = rho * (1 + Math.cos(noise_theta));
         const y = rho * (1 + Math.sin(noise_theta));
         const pos = j * n_scl;
@@ -41,7 +53,7 @@ class Sketch extends Engine {
       }
     }
     // create hexagons
-    const control_radius = 0.2;
+    const control_radius = this._random(-1, 1);
     this._hexagons = [];
     for (let y = 0; y < this._rows; y++) {
       for (let x = 0; x < this._cols; x++) {
@@ -66,7 +78,7 @@ class Sketch extends Engine {
     }
 
     // set hexagon states
-    if ((this._frameCount % this._phase_duration == 0 || this._frameCount == 1) && this._auto) {
+    if (((this._frameCount - this._frame_offset) % this._phase_duration == 0 || this._frameCount == 1) && this._auto) {
       const current_phase = parseInt(this._frameCount / this._phase_duration) % this._phases;
       const next_phase = (current_phase + 1) % this._phases;
 
@@ -76,11 +88,12 @@ class Sketch extends Engine {
       });
     }
 
-    // draw
-    this.background("rgb(10, 10, 10)");
+    // background
+    this.background(this._back_colors[this._hexagon_mode]);
 
+    // draw
     if (this._auto) {
-      const percent = this._easeInOut((this._frameCount % this._phase_duration) / this._phase_duration);
+      const percent = this._easeInOut(((this._frameCount - this._frame_offset) % this._phase_duration) / this._phase_duration);
       this._hexagons.forEach(h => h.show(percent, this._ctx));
     } else {
       this._hexagons.forEach(h => {
@@ -127,20 +140,39 @@ class Sketch extends Engine {
     return x < 0.5 ? 8 * Math.pow(x, 4) : 1 - Math.pow(-2 * x + 2, 4) / 2;
   }
 
-  _generateState(x, y, i) {
+  _generateState(x, y, i, excursion = 2) {
     const n = this._noise.noise3D(x, y, i);
-    return Math.floor(n * 2);
+    return Math.floor(n * excursion);
+  }
+
+  _random(a, b) {
+    if (a == undefined && b == undefined) return this._random(0, 1);
+    else if (b == undefined) return this._random(0, a);
+    else if (a != undefined && b != undefined) return Math.random() * (b - a) + a;
+  }
+
+  _random_int(a, b) {
+    if (a == undefined && b == undefined) return this._random_int(0, 1);
+    else if (b == undefined) return this._random_int(0, a);
+    else if (a != undefined && b != undefined) return Math.floor(Math.random() * (b - a + 1)) + a;
   }
 
   click(e) {
+    if (this._auto) return;
+
     const coords = this._calculate_press_coords(e);
-    // TODO: find hexagon closest to these coordinates and rotate it
     const close = this._hexagons.filter(h => h.isClose(coords));
+
     if (close.length > 0) {
       close[0].state_from = close[0].state_to;
       close[0].state_to = close[0].state_from + 1;
-
       close[0].frame_offset = this._frameCount;
+    }
+  }
+
+  keydown(e) {
+    if (e.code === "Enter") {
+      this.setup();
     }
   }
 }

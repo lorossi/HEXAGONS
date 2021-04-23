@@ -1,24 +1,25 @@
+// apotheme to radius relation
 const FN = 1 / (2 * Math.tan(Math.PI / 6));
 
 class Hexagon {
-  constructor(x, y, scl, mode, control_radius = 0.75) {
+  constructor(x, y, scl, mode, control_radius = 0.25) {
     this._x = x;
     this._y = y;
     this._scl = scl;
     this._mode = mode;
+    this._control_radius = control_radius;
+    // state (rotation)
     this._state_from = 0;
     this._state_to = 1;
-    this._control_radius = control_radius;
-
+    // width and height of the hexagon
     this._w = Math.sqrt(3) * this._scl;
     this._h = this._scl * 2;
+    // horizontal offset
     this._dx = [0, this._w / 2];
-    //this._center_x = this._w * 0.75 + this._x * this._w + this._dx[this._y % 2];
-    //this._center_y = this._h * 1.125 + this._y * this._h * 0.75;
-
+    // weird calculation of center position
     this._center_x = this._x * this._w + this._dx[this._y % 2];
     this._center_y = this._y * this._h * 0.75;
-
+    // curves sides
     this._exchanges = [{
       from: 0,
       to: 2,
@@ -30,38 +31,30 @@ class Hexagon {
       from: 4,
       to: 5,
     },];
-
+    // offset for manual rotation
     this._frame_offset = 0;
-
+    // calculates angles starting from states
     this._calculateAngles();
+    // calculate certices positions
     this._generateVertices(0);
-  }
-
-  _wrap(angle) {
-    if (angle < 0) angle += Math.PI * 2;
-    else if (angle > Math.PI * 2) angle -= Math.PI * 2;
-
-    return angle;
   }
 
   _calculateAngles() {
     this._angle_from = Math.PI * 2 / 6 * this._state_from;
     this._angle_to = Math.PI * 2 / 6 * this._state_to;
-
-    if (Math.abs(this._angle_from - this._angle_to) > Math.PI * 2) {
-      this._angle_from = this._wrap(this._angle_from);
-      this._angle_to = this._wrap(this._angle_to);
-    }
   }
 
   _generateVertices(percent) {
+    // base displacement
     const dPhi = this._angle_from + percent * (this._angle_to - this._angle_from);
 
+    // calculate vertices and control points (for bezier curves)
     this._control_points = [];
     this._vertices = [];
     for (let s = 0; s < 6; s++) {
       const theta = Math.PI * 2 / 6 * s + Math.PI / 2 + dPhi;
 
+      // control points
       const cx = this._scl * this._control_radius * Math.cos(theta);
       const cy = this._scl * this._control_radius * Math.sin(theta);
       this._control_points.push({
@@ -69,7 +62,7 @@ class Hexagon {
         x: cx,
         y: cy,
       });
-
+      // vertices
       const vx = this._scl * Math.cos(theta);
       const vy = this._scl * Math.sin(theta);
       this._vertices.push({
@@ -79,6 +72,7 @@ class Hexagon {
       });
     }
 
+    // calculat emiddle point of each side
     this._middle_points = [];
     for (let s = 0; s < 6; s++) {
       const theta = Math.PI * 2 / 6 * s + dPhi;
@@ -98,47 +92,26 @@ class Hexagon {
     ctx.save();
     ctx.translate(this._center_x, this._center_y);
 
+    // currently only one mode...
     if (this._mode == 0) {
-      this._exchanges.forEach(e => {
-        const start = this._middle_points[e.from];
-        const end = this._middle_points[e.to];
-        const control_1 = this._control_points[e.from];
-        const control_2 = this._control_points[e.to];
-
-        ctx.strokeStyle = "rgb(220, 220, 220)";
-        ctx.lineWidth = 4;
-        ctx.beginPath();
-        ctx.moveTo(start.x, start.y);
-        ctx.bezierCurveTo(control_1.x, control_1.y, control_2.x, control_2.y, end.x, end.y);
-        ctx.stroke();
-      });
+      ctx.strokeStyle = "rgb(220, 220, 220)";
     } else if (this._mode == 1) {
-      for (let i = 0; i < 6; i++) {
-        const hue = i / 6 * 360;
-        const start = this._vertices[i];
-        const end = this._vertices[(i + 1) % 6];
-
-        ctx.fillStyle = `hsl(${hue}, 100%, 50%)`;
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineTo(start.x, start.y);
-        ctx.lineTo(end.x, end.y);
-        ctx.fill();
-      }
-    } else if (this._mode == 2) {
-      this._exchanges.forEach((e, i) => {
-        const hue = i / 6 * 360;
-        const start = this._middle_points[e.from];
-        const end = this._middle_points[e.to];
-
-        ctx.fillStyle = `hsl(${hue}, 100%, 50%)`;
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineTo(start.x, start.y);
-        ctx.lineTo(end.x, end.y);
-        ctx.fill();
-      });
+      ctx.strokeStyle = "rgb(15, 15, 15)";
     }
+
+    ctx.lineWidth = 4;
+
+    this._exchanges.forEach(e => {
+      const start = this._middle_points[e.from];
+      const end = this._middle_points[e.to];
+      const control_1 = this._control_points[e.from];
+      const control_2 = this._control_points[e.to];
+
+      ctx.beginPath();
+      ctx.moveTo(start.x, start.y);
+      ctx.bezierCurveTo(control_1.x, control_1.y, control_2.x, control_2.y, end.x, end.y);
+      ctx.stroke();
+    });
 
     ctx.restore();
   }
