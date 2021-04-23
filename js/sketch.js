@@ -18,11 +18,10 @@ class Sketch extends Engine {
     this._rows = 12;
     this._cols = 12;
     this._duration = 900;
-    this._phases = 15;
+    this._phases = 10;
     this._hexagon_mode = this._random_int(1);
-    this._hexagon_mode = 1;
     this._back_colors = ["rgb(15, 15, 15)", "rgb(220, 220, 220)"];
-    this._recording = true;
+    this._recording = false;
     this._show_fps = false;
     this._auto = true;
 
