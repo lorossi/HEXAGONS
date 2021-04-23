@@ -1,5 +1,6 @@
 class Sketch extends Engine {
   preload() {
+    // bind reset
     const reset = document.querySelector("#reset");
     reset.addEventListener("click", e => this.setup(e));
   }
@@ -78,7 +79,7 @@ class Sketch extends Engine {
     }
 
     // set hexagon states
-    if (((this._frameCount - this._frame_offset) % this._phase_duration == 0 || this._frameCount == 1) && this._auto) {
+    if (((this._frameCount - this._frame_offset) % this._phase_duration == 0) && this._auto) {
       const current_phase = parseInt(this._frameCount / this._phase_duration) % this._phases;
       const next_phase = (current_phase + 1) % this._phases;
 
