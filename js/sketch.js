@@ -3,6 +3,14 @@ class Sketch extends Engine {
     // bind reset
     const reset = document.querySelector("#reset");
     reset.addEventListener("click", e => this.setup(e));
+    const toggleauto = document.querySelector("#toggleauto");
+    toggleauto.addEventListener("click", () => this.toggleAuto());
+  }
+
+  toggleAuto() {
+    this._auto = !this._auto;
+    this._hexagons.forEach(h => h.state_to = h.state_from);
+    document.querySelector(".instructions").style.visibility = this._auto ? "hidden" : "visible";
   }
 
   setup() {
@@ -27,6 +35,7 @@ class Sketch extends Engine {
     document.body.style.backgroundColor = this._back_colors[this._hexagon_mode];
     const links = document.querySelectorAll("a");
     links.forEach(l => l.style.color = this._back_colors[(this._hexagon_mode + 1) % 2]);
+    document.querySelector(".instructions").style.visibility = this._auto ? "hidden" : "visible";
     // setup capturer
     if (this._recording) {
       this._capturer = new CCapture({ format: "png" });

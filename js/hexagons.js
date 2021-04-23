@@ -48,13 +48,13 @@ class Hexagon {
     // base displacement
     const dPhi = this._angle_from + percent * (this._angle_to - this._angle_from);
 
-    // calculate vertices and control points (for bezier curves)
+    // calculate vertices and controls points (for bezier curves)
     this._control_points = [];
     this._vertices = [];
     for (let s = 0; s < 6; s++) {
       const theta = Math.PI * 2 / 6 * s + Math.PI / 2 + dPhi;
 
-      // control points
+      // controls points
       const cx = this._scl * this._control_radius * Math.cos(theta);
       const cy = this._scl * this._control_radius * Math.sin(theta);
       this._control_points.push({
