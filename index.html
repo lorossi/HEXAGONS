@@ -19,10 +19,10 @@
 </head>
 
 <body>
-  <div class="instructions">
-    <a class="mobile">tap</a>
-    <a class="pc">click</a>
-    <a id="text">on the screen</a>
+  <div class="instructions" togglable>
+    <p class="mobile" togglable>tap</p>
+    <p class="pc" togglable>click</p>
+    <p id="text" togglable>on the screen</a>
   </div>
 
   <div class="container">
@@ -30,14 +30,13 @@
     </canvas>
   </div>
 
-  <div class="controls">
-    <a id="reset">reset all</a>
-    <a id="toggleauto">toggle auto</a>
-  </div>
-
   <div class="footer">
-    <a href="https://www.lorenzoros.si">made by Lorenzo Rossi</a>
-    <a href="https://github.com/lorossi/HEXAGONS">GitHub repo</a>
+    <a href="https://www.lorenzoros.si" togglable>made by Lorenzo Rossi</a>
+    <div class="controls">
+      <p id="reset" togglable>reset all</>
+      <p id="toggleauto" togglable>toggle auto</p>
+    </div>
+    <a href="https://github.com/lorossi/HEXAGONS" togglable>GitHub repo</a>
   </div>
 </body>
 

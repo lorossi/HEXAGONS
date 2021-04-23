@@ -33,9 +33,12 @@ class Sketch extends Engine {
     console.clear();
     // set page style
     document.body.style.backgroundColor = this._back_colors[this._hexagon_mode];
-    const links = document.querySelectorAll("a");
-    links.forEach(l => l.style.color = this._back_colors[(this._hexagon_mode + 1) % 2]);
+    const text = document.querySelectorAll("[togglable]");
+    text.forEach(t => t.style.color = this._back_colors[(this._hexagon_mode + 1) % 2]);
     document.querySelector(".instructions").style.visibility = this._auto ? "hidden" : "visible";
+    const controls = document.querySelectorAll(".controls *");
+    controls.forEach(c => c.style.border = "1px solid " + this._back_colors[(this._hexagon_mode + 1) % 2]);
+
     // setup capturer
     if (this._recording) {
       this._capturer = new CCapture({ format: "png" });
@@ -53,7 +56,7 @@ class Sketch extends Engine {
       const noise_theta = Math.PI * 2 * i / this._phases;
 
       for (let j = 0; j < this._cols * this._rows; j++) {
-        const rho = 10;
+        const rho = 0.5;
         const n_scl = 2;
         const x = rho * (1 + Math.cos(noise_theta));
         const y = rho * (1 + Math.sin(noise_theta));
@@ -67,7 +70,6 @@ class Sketch extends Engine {
     this._hexagons = [];
     for (let y = 0; y < this._rows; y++) {
       for (let x = 0; x < this._cols; x++) {
-        const j = this._cols * x + y;
         const new_h = new Hexagon(x, y, this._scl, this._hexagon_mode, control_radius);
 
         if (!this._auto) {
@@ -150,7 +152,7 @@ class Sketch extends Engine {
     return x < 0.5 ? 8 * Math.pow(x, 4) : 1 - Math.pow(-2 * x + 2, 4) / 2;
   }
 
-  _generateState(x, y, i, excursion = 2) {
+  _generateState(x, y, i, excursion = 3) {
     const n = this._noise.noise3D(x, y, i);
     return Math.floor(n * excursion);
   }

@@ -12,6 +12,7 @@ body *, body {
 
 body {
   font-family: Hack;
+  font-size: 1rem;
 }
 
 .mobile {
@@ -43,6 +44,8 @@ a:hover {
   display: flex;
   flex-direction: row;
   justify-content: center;
+
+  font-size: 2rem;
 }
 
 #text:before {
@@ -66,13 +69,6 @@ a:hover {
 }
 
 .controls {
-  z-index: 10;
-
-  position: absolute;
-  width: 100vw;
-
-  bottom: 1vh;
-
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -80,8 +76,14 @@ a:hover {
 
 .controls * {
   cursor: pointer;
-  margin-left: 5vw;
-  margin-right: 5vw;
+  margin-left: 1vw;
+  margin-right: 1vw;
+
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+  border-radius: 1px;
 }
 
 .footer {
@@ -89,17 +91,16 @@ a:hover {
 
   position: absolute;
   width: 100vw;
-
   bottom: 1vh;
 
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
   flex-direction: row;
 }
 
 .footer * {
-  margin-left: 5vw;
-  margin-right: 5vw;
   text-align: center;
 }
 
@@ -109,15 +110,23 @@ a:hover {
     width: 95vw;
   }
 
-  .controls {
-    bottom: 15vh;
-  }
-
   .pc {
     display: none;
   }
 
   .mobile {
     display: inline-block;
+  }
+
+  .footer {
+    flex-direction: column;
+  }
+
+  .footer * {
+    margin-top: 1vh;
+  }
+
+  .footer a:last-child {
+    margin-top: 2vh;
   }
 }
