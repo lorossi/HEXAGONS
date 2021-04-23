@@ -18,15 +18,16 @@ class Sketch extends Engine {
     this._rows = 12;
     this._cols = 12;
     this._duration = 900;
-    this._phases = 10;
+    this._phases = 15;
     this._hexagon_mode = this._random_int(1);
+    this._hexagon_mode = 1;
     this._back_colors = ["rgb(15, 15, 15)", "rgb(220, 220, 220)"];
-    this._recording = false;
+    this._recording = true;
     this._show_fps = false;
     this._auto = true;
 
     // sketch setup
-    this._frame_offset = this._frameCount + 1;
+    this._frame_offset = this._frameCount;
     this._scl = this._width / this._cols;
     this._phase_duration = this._duration / this._phases;
     this._noise = new SimplexNoise();
@@ -47,7 +48,7 @@ class Sketch extends Engine {
     }
     // setup random saves
     this._save_frame = [];
-    for (let i = 0; i < this._random_saves; i++) this._save_frame.push(Math.floor(Math.random() * this._duration));
+    for (let i = 0; i < this._random_saves; i++) this._save_frame.push(this._random_int(this._duration));
 
     // set up states
     this._states = new Array(this._phases);
@@ -56,8 +57,8 @@ class Sketch extends Engine {
       const noise_theta = Math.PI * 2 * i / this._phases;
 
       for (let j = 0; j < this._cols * this._rows; j++) {
-        const rho = 0.5;
-        const n_scl = 2;
+        const rho = 5;
+        const n_scl = 1;
         const x = rho * (1 + Math.cos(noise_theta));
         const y = rho * (1 + Math.sin(noise_theta));
         const pos = j * n_scl;
