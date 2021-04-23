@@ -47,7 +47,10 @@ class Engine {
     }
     // updated last frame rendered time
     this.then = performance.now();
-    // compute frame rate
+    // now draw
+    this._ctx.save();
+    this.draw();
+    this._ctx.restore();
     // update frame count
     this._frameCount++;
     // update fpsBuffer
@@ -55,10 +58,6 @@ class Engine {
     this._fpsBuffer = this._fpsBuffer.splice(0, 30);
     // calculate average fps
     this._frameRate = this._fpsBuffer.reduce((a, b) => a + b, 0) / this._fpsBuffer.length;
-    // now draw
-    this._ctx.save();
-    this.draw();
-    this._ctx.restore();
   }
 
   _calculate_press_coords(e) {
@@ -150,14 +149,17 @@ class Engine {
 
   preload() {
     // ran once
+    preload();
   }
 
   setup() {
     // ran once
+    setup();
   }
 
   draw() {
     // ran continuosly
+    draw(this._ctx);
   }
 }
 
