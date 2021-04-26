@@ -20,5 +20,4 @@ There is not much to say, just go on my [website](https://www.lorenzoros.si/HEXA
 
 Font used: [Hack.](https://sourcefoundry.org/hack/)
 
-
 This project is distributed under Attribution 4.0 International (CC BY 4.0) license.
