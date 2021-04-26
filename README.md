@@ -12,7 +12,9 @@ There is not much to say, just go on my [website](https://www.lorenzoros.si/HEXA
 
 ## Output
 
-![image-1]
+![image-1](output/stills/frame-000173.png)
+
+![image-2](output/stills/frame-000129.png)
 
 ## Credits
 
