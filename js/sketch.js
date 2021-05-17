@@ -23,7 +23,7 @@ class Sketch extends Engine {
     this._back_colors = ["rgb(15, 15, 15)", "rgb(220, 220, 220)"];
     this._recording = false;
     this._show_fps = false;
-    this._auto = true;
+    this._auto = false;
 
     // sketch setup
     this._frame_offset = this._frameCount;
