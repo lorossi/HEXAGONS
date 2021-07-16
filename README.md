@@ -58,14 +58,6 @@ As always, check my [Instagram profile](https://www.instagram.com/lorossi97/) to
 
 ![image-1](output/stills/still-07.png) ![image-1](output/stills/still-08.png)
 
-![image-1](output/stills/still-09.png) ![image-1](output/stills/still-10.png)
-
-![image-1](output/stills/still-11.png) ![image-1](output/stills/still-12.png)
-
-![image-1](output/stills/still-13.png) ![image-1](output/stills/still-14.png)
-
-![image-1](output/stills/still-15.png) ![image-1](output/stills/still-16.png)
-
 ### GIFs
 
 ![gif-1](output/videos/video_1_gif.gif) ![gif-2](output/videos/video_2_gif.gif)
