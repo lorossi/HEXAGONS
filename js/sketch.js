@@ -49,9 +49,6 @@ class Sketch extends Engine {
       this._capturer_started = false;
       this._random_saves = 5;
     }
-    // setup random saves
-    this._save_frame = [];
-    for (let i = 0; i < this._random_saves; i++) this._save_frame.push(this._random_int(this._duration));
 
     // set up states
     this._states = new Array(this._phases);
@@ -127,9 +124,6 @@ class Sketch extends Engine {
         h.show(percent, this._ctx);
       });
     }
-
-
-    if (this._save_frame.includes(this._frameCount)) this.saveFrame();
 
     // show FPS
     if (this._show_fps) {
