@@ -62,8 +62,8 @@ a:hover {
 }
 
 #sketch {
-  height: 85vh;
-  width: 85vh;
+  height: 80vh;
+  width: 80vh;
 
   touch-action: none;
 }
@@ -79,11 +79,11 @@ a:hover {
   margin-left: 1vw;
   margin-right: 1vw;
 
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-  padding-top: 0.125rem;
-  padding-bottom: 0.125rem;
-  border-radius: 1px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  border-radius: 2px;
 }
 
 .footer {
@@ -120,13 +120,11 @@ a:hover {
 
   .footer {
     flex-direction: column;
+    align-items: space-around;
   }
 
-  .footer * {
-    margin-top: 1vh;
-  }
-
-  .footer a:last-child {
+  .footer a {
     margin-top: 2vh;
+    margin-bottom: 2vh;
   }
 }

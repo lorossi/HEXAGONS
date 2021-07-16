@@ -3,14 +3,15 @@ class Sketch extends Engine {
     // bind reset
     const reset = document.querySelector("#reset");
     reset.addEventListener("click", e => this.setup(e));
-    const toggleauto = document.querySelector("#toggleauto");
-    toggleauto.addEventListener("click", () => this.toggleAuto());
+    const toggle_auto = document.querySelector("#toggle-auto");
+    toggle_auto.addEventListener("click", () => this.toggleAuto());
   }
 
   toggleAuto() {
     this._auto = !this._auto;
     this._hexagons.forEach(h => h.state_to = h.state_from);
     document.querySelector(".instructions").style.visibility = this._auto ? "hidden" : "visible";
+    document.querySelector("#toggle-auto").innerHTML = this._auto ? "manual mode" : "automatic mode";
   }
 
   setup() {
@@ -23,7 +24,7 @@ class Sketch extends Engine {
     this._back_colors = ["rgb(15, 15, 15)", "rgb(220, 220, 220)"];
     this._recording = false;
     this._show_fps = false;
-    this._auto = false;
+    this._auto = true;
 
     // sketch setup
     this._frame_offset = this._frameCount;
@@ -33,7 +34,7 @@ class Sketch extends Engine {
     console.clear();
     // set page style
     document.body.style.backgroundColor = this._back_colors[this._hexagon_mode];
-    const text = document.querySelectorAll("[togglable]");
+    const text = document.querySelectorAll("[ change-color]");
     text.forEach(t => t.style.color = this._back_colors[(this._hexagon_mode + 1) % 2]);
     document.querySelector(".instructions").style.visibility = this._auto ? "hidden" : "visible";
     const controls = document.querySelectorAll(".controls *");
