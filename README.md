@@ -50,23 +50,47 @@ As always, check my [Instagram profile](https://www.instagram.com/lorossi97/) to
 
 ### Stills
 
-![image-1](output/stills/frame-000173.png)
+![image-1](output/stills/still-01.png)
 
-![image-2](output/stills/frame-000394.png)
+![image-1](output/stills/still-02.png)
 
-![image-3](output/stills/frame-000787.png)
+![image-1](output/stills/still-03.png)
 
-![image-4](output/stills/frame-000129.png)
+![image-1](output/stills/still-04.png)
 
-![image-5](output/stills/frame-000658.png)
+![image-1](output/stills/still-05.png)
 
-![image-6](output/stills/frame-000752.png)
+![image-1](output/stills/still-06.png)
+
+![image-1](output/stills/still-07.png)
+
+![image-1](output/stills/still-08.png)
+
+![image-1](output/stills/still-09.png)
+
+![image-1](output/stills/still-10.png)
+
+![image-1](output/stills/still-11.png)
+
+![image-1](output/stills/still-12.png)
+
+![image-1](output/stills/still-13.png)
+
+![image-1](output/stills/still-14.png)
+
+![image-1](output/stills/still-15.png)
+
+![image-1](output/stills/still-16.png)
 
 ### GIFs
 
 ![gif-1](output/videos/video_1_gif.gif)
 
 ![gif-2](output/videos/video_2_gif.gif)
+
+![gif-3](output/videos/video_3_gif.gif)
+
+![gif-4](output/videos/video_4_gif.gif)
 
 ## Credits
 
