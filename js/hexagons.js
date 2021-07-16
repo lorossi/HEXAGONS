@@ -1,4 +1,4 @@
-// apotheme to radius relation
+// apothem to radius relation
 const FN = 1 / (2 * Math.tan(Math.PI / 6));
 
 class Hexagon {
@@ -35,7 +35,7 @@ class Hexagon {
     this._frame_offset = 0;
     // calculates angles starting from states
     this._calculateAngles();
-    // calculate certices positions
+    // calculate vertices positions
     this._generateVertices(0);
   }
 
@@ -47,13 +47,11 @@ class Hexagon {
   _generateVertices(percent) {
     // base displacement
     const dPhi = this._angle_from + percent * (this._angle_to - this._angle_from);
-
     // calculate vertices and controls points (for bezier curves)
     this._control_points = [];
     this._vertices = [];
     for (let s = 0; s < 6; s++) {
       const theta = Math.PI * 2 / 6 * s + Math.PI / 2 + dPhi;
-
       // controls points
       const cx = this._scl * this._control_radius * Math.cos(theta);
       const cy = this._scl * this._control_radius * Math.sin(theta);
@@ -71,8 +69,7 @@ class Hexagon {
         y: vy,
       });
     }
-
-    // calculat emiddle point of each side
+    // calculate middle point of each side
     this._middle_points = [];
     for (let s = 0; s < 6; s++) {
       const theta = Math.PI * 2 / 6 * s + dPhi;
@@ -92,7 +89,7 @@ class Hexagon {
     ctx.save();
     ctx.translate(this._center_x, this._center_y);
 
-    // currently only one mode...
+    // black mode and white mode
     if (this._mode == 0) {
       ctx.strokeStyle = "rgb(220, 220, 220)";
     } else if (this._mode == 1) {
@@ -101,6 +98,7 @@ class Hexagon {
 
     ctx.lineWidth = 4;
 
+    // create lines between each exchange point
     this._exchanges.forEach(e => {
       const start = this._middle_points[e.from];
       const end = this._middle_points[e.to];

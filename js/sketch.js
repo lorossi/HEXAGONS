@@ -5,6 +5,9 @@ class Sketch extends Engine {
     reset.addEventListener("click", e => this.setup(e));
     const toggle_auto = document.querySelector("#toggle-auto");
     toggle_auto.addEventListener("click", () => this.toggleAuto());
+    // clear console
+    console.clear();
+    console.log("Snooping around? Check the repo! https://github.com/lorossi/HEXAGONS");
   }
 
   toggleAuto() {
@@ -24,17 +27,17 @@ class Sketch extends Engine {
     this._back_colors = ["rgb(15, 15, 15)", "rgb(220, 220, 220)"];
     this._recording = false;
     this._show_fps = false;
-    this._auto = true;
+    this._auto = false;
 
     // sketch setup
     this._frame_offset = this._frameCount;
     this._scl = this._width / this._cols;
     this._phase_duration = this._duration / this._phases;
     this._noise = new SimplexNoise();
-    console.clear();
+
     // set page style
     document.body.style.backgroundColor = this._back_colors[this._hexagon_mode];
-    const text = document.querySelectorAll("[ change-color]");
+    const text = document.querySelectorAll("[change-color]");
     text.forEach(t => t.style.color = this._back_colors[(this._hexagon_mode + 1) % 2]);
     document.querySelector(".instructions").style.visibility = this._auto ? "hidden" : "visible";
     const controls = document.querySelectorAll(".controls *");
@@ -66,6 +69,7 @@ class Sketch extends Engine {
         this._states[i][j] = this._generateState(x, y, pos);
       }
     }
+
     // create hexagons
     const control_radius = this._random(-1, 1);
     this._hexagons = [];
