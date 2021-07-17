@@ -13,9 +13,9 @@ class Sketch extends Engine {
     this._cols = 12;
     this._duration = 900;
     this._phases = 10;
-    this._recording = true;
+    this._recording = false;
     this._show_fps = false;
-    this._auto = true;
+    this._auto = false;
   }
 
   toggleAuto() {
