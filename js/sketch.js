@@ -8,6 +8,14 @@ class Sketch extends Engine {
     // clear console
     console.clear();
     console.log("Snooping around? Check the repo! https://github.com/lorossi/HEXAGONS");
+    // parameters
+    this._rows = 12;
+    this._cols = 12;
+    this._duration = 900;
+    this._phases = 10;
+    this._recording = true;
+    this._show_fps = false;
+    this._auto = true;
   }
 
   toggleAuto() {
@@ -18,17 +26,8 @@ class Sketch extends Engine {
   }
 
   setup() {
-    // parameters
-    this._rows = 12;
-    this._cols = 12;
-    this._duration = 900;
-    this._phases = 10;
     this._hexagon_mode = this._random_int(1);
     this._back_colors = ["rgb(15, 15, 15)", "rgb(220, 220, 220)"];
-    this._recording = false;
-    this._show_fps = false;
-    this._auto = false;
-
     // sketch setup
     this._frame_offset = this._frameCount;
     this._scl = this._width / this._cols;
@@ -42,12 +41,12 @@ class Sketch extends Engine {
     document.querySelector(".instructions").style.visibility = this._auto ? "hidden" : "visible";
     const controls = document.querySelectorAll(".controls *");
     controls.forEach(c => c.style.border = "1px solid " + this._back_colors[(this._hexagon_mode + 1) % 2]);
+    document.querySelector("#toggle-auto").innerHTML = this._auto ? "manual mode" : "automatic mode";
 
     // setup capturer
     if (this._recording) {
       this._capturer = new CCapture({ format: "png" });
       this._capturer_started = false;
-      this._random_saves = 5;
     }
 
     // set up states
