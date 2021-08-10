@@ -4,13 +4,13 @@
 
 ## Try it here: [lorenzoros.si/HEXAGONS](https://www.lorenzoros.si/HEXAGONS)
 
-## The idea
+## Prologue - The idea
 
 Did you know that you can fill a plane just using hexagons? It's one of the three regular polygons *(together with squares and triangles)* that have this special feature. John Conway, the legendary British mathematician who also invented Game of Life, called a plane divided into hexagons a *hextile*.
 
 Having played Civilization V for more than 600 hours, I decided that I wanted to give it a go. *Is there a way I could making anything interesting with this kind of concept?*
 
-## The coding phase
+## Chapter 1 - The coding phase
 
 So with this half-plan in mind, I opened up my favourite editor (VScode, I'm too scared to try vim) and then promptly cloned my *always-growing, always-improving* [small canvas boilerplate](https://github.com/lorossi/empty-html5-canvas-project).
 
@@ -22,7 +22,7 @@ At that point the path was set, but straight lines were not cutting it. Thing is
 
 So I did what any other reasonable programmer would have done: *I quit.*
 
-## More coding
+## Chapter 2 - More coding
 
 After a few days I picked up the project again. Encouraged by the prospect of making it work (look mom I almost have 150 followers on Instagram!), I started going through the Mozilla foundation [web docs](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) and quickly found many different ways to draw curves.
 
