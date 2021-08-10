@@ -23,6 +23,7 @@ class Sketch extends Engine {
     this._hexagons.forEach(h => h.state_to = h.state_from);
     document.querySelector(".instructions").style.visibility = this._auto ? "hidden" : "visible";
     document.querySelector("#toggle-auto").innerHTML = this._auto ? "manual mode" : "automatic mode";
+    this._frame_offset = this._frameCount;
   }
 
   setup() {
